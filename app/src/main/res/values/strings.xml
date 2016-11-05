@@ -5,4 +5,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="action_myshop">action_myshop</string>
+    <string name="action_addlist">action_mylist</string>
 </resources>
