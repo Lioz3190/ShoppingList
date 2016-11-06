@@ -1,5 +1,6 @@
 package com.example.lioz.shoppinglist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -66,23 +67,32 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.action_myshop:
-
-
+                Intent intentShop = new Intent(MainActivity.this,MyShop.class);
+                startActivity(intentShop);
+                break;
             case R.id.action_addlist:
-
-
+                Intent intentAddList = new Intent(MainActivity.this,MyList.class);
+                startActivity(intentAddList);
+                break;
             default:
                 break;
-
+        }
             return super.onOptionsItemSelected(item);
         }
+
 
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
        switch(item.getItemId()) {
 
            case R.id.action_myshop:
-               // Handle the camera action
+               Intent intentShop = new Intent(MainActivity.this,MyShop.class);
+               startActivity(intentShop);
+               break;
+           case R.id.action_addlist:
+               Intent intentAddList = new Intent(MainActivity.this,MyList.class);
+               startActivity(intentAddList);
+               break;
        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
