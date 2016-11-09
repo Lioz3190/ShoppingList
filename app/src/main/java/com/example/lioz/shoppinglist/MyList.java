@@ -10,7 +10,7 @@ import android.widget.*;
  */
 
 public class MyList extends AppCompatActivity {
-        private ArrayList<String> listItems=new ArrayList<>();
+        private ArrayList<String> listItems = new ArrayList<>();
         private ArrayAdapter<String> adapter;
         private EditText editTxt;
         private Button btn;

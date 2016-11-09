@@ -5,11 +5,16 @@
         <item
             android:id="@+id/action_myshop"
             android:icon="@drawable/myshop"
-            android:title="my shop" />
+            android:title="My shop" />
         <item
             android:id="@+id/content_main"
             android:icon="@drawable/mylist"
-            android:title="my list" />
+            android:title="My lists" />
+
+        <item
+            android:id="@+id/action_addlist"
+            android:icon="@drawable/addlist"
+            android:title="Add list"/>
     </group>
 
 
