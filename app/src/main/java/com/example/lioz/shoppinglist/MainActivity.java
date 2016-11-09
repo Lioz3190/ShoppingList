@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentAddList = new Intent(MainActivity.this,MyList.class);
+                Intent intentAddList = new Intent(MainActivity.this,AddList.class);
                 startActivity(intentAddList);
 
             }
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intentShop);
                 break;
             case R.id.action_addlist:
-                Intent intentAddList = new Intent(MainActivity.this,MyList.class);
+                Intent intentAddList = new Intent(MainActivity.this,AddList.class);
                 startActivity(intentAddList);
                 break;
             default:

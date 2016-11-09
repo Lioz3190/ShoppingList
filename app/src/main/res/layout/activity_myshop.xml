@@ -11,6 +11,5 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:clickable="true"
         tools:context="com.example.lioz.shoppinglist.MyShop" />
-        />
 
 </RelativeLayout>

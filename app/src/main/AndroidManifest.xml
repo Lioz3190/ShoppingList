@@ -19,6 +19,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".MyList"
+            android:label="Add items"
+            android:parentActivityName="com.example.lioz.shoppinglist.AddList" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".AddList"
+            android:label="Add list"
             android:parentActivityName="com.example.lioz.shoppinglist.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +37,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MyShop"
+            android:label="Add a Shop"
             android:parentActivityName="com.example.lioz.shoppinglist.MainActivity" >
             <uses-library android:name="com.google.android.maps" />
             <uses-permission android:name="android.permission.INTERNET" />
