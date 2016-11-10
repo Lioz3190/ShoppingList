@@ -3,7 +3,6 @@ package com.example.lioz.shoppinglist;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -94,6 +93,10 @@ public class MainActivity extends AppCompatActivity
            case R.id.action_addlist:
                Intent intentAddList = new Intent(MainActivity.this,MyList.class);
                startActivity(intentAddList);
+               break;
+           case R.id.alert_date:
+               Intent intentAlertDate = new Intent(MainActivity.this,AlertDate.class);
+               startActivity(intentAlertDate);
                break;
        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

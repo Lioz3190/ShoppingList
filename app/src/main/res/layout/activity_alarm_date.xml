@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:id="@+id/textView2"
+        tools:text="Choisir son alarme"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <Button
+        android:text="Pick Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pickDateButton"
+        tools:text="Pick Date"
+        android:onClick="showDatePickerDialog"
+        android:elevation="0dp"
+        android:visibility="visible"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_weight="0.01" />
+
+    <TextView
+        android:text="La date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dateTextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+    <Button
+        android:text="Pick Time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="showTimePickerDialog"
+        android:id="@+id/pickTimeButton" />
+
+    <TextView
+        android:text="L'heure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/timeTextView" />
+
+</LinearLayout>

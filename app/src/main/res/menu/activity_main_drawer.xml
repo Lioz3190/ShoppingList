@@ -17,6 +17,17 @@
             android:title="Add list"/>
     </group>
 
-
+    <item android:title="Alert">
+        <menu>
+            <item
+                android:id="@+id/alert_date"
+                android:icon="@drawable/ic_alarm_black_24dp"
+                android:title="Date" />
+            <item
+                android:id="@+id/alert_shop"
+                android:icon="@drawable/ic_store_black_24dp"
+                android:title="Shop" />
+        </menu>
+    </item>
 
 </menu>
