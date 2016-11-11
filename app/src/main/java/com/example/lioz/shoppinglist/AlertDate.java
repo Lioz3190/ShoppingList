@@ -14,7 +14,7 @@ import android.view.View;
 
 
 import com.example.lioz.shoppinglist.Notify.NotificationPublisher;
-import com.example.lioz.shoppinglist.Notify.NotificationReceiverActivity;
+//import com.example.lioz.shoppinglist.Notify.NotificationReceiverActivity;
 import com.example.lioz.shoppinglist.fragments.DatePickerFragment;
 import com.example.lioz.shoppinglist.fragments.TimePickerFragment;
 
