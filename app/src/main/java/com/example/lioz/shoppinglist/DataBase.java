@@ -9,10 +9,14 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBase extends SQLiteOpenHelper  {
-    public static final String listOfList_CREATE = "CREATE TABLE IF NOT EXISTS ListOfList(Id INTEGER PRIMARY KEY AUTOINCREMENT,MyListId INTEGER, FOREIGN KEY(MyListId) REFERENCES MyList(Id) ";
-    public static final String myList_CREATE = "CREATE TABLE IF NOT EXISTS MyList(Id INTEGER PRIMARY KEY AUTOINCREMENT";
-    public DataBase(Context context, String name, CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    protected SQLiteDatabase db = null;
+    protected DataBase dbHandler = null;
+    public static final String listOfList = "ListOfList";
+    public static final String myList = "MyList";
+    public static final String listOfList_CREATE = "CREATE TABLE IF NOT EXISTS"+listOfList+"(Id INTEGER PRIMARY KEY AUTOINCREMENT,MyListId INTEGER, FOREIGN KEY(MyListId) REFERENCES MyList(Id) ";
+    public static final String myList_CREATE = "CREATE TABLE IF NOT EXISTS"+ myList+"(Id INTEGER PRIMARY KEY AUTOINCREMENT, ListName VARCHAR(20)";
+    public DataBase(Context context, CursorFactory factory) {
+        super(context, "ShoppingList.db", factory, 1);
     }
 
     public void onCreate(SQLiteDatabase db) {
@@ -24,6 +28,16 @@ public class DataBase extends SQLiteOpenHelper  {
         db.execSQL("DROP TABLE IF EXISTS ListOfList;");
         db.execSQL(" DROP TABLE IF EXISTS MyList;");
         onCreate(db);
+    }
+    public SQLiteDatabase open(){
+        db = dbHandler.getWritableDatabase();
+        return db;
+    }
+    public void close(){
+        db.close();
+    }
+    public SQLiteDatabase getDb(){
+        return db;
     }
 }
 
