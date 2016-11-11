@@ -3,16 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:weightSum="1">
 
     <TextView
-        android:text="TextView"
+        android:text="Config Alarm"
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:id="@+id/textView2"
-        tools:text="Choisir son alarme"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="16dp" />
 
     <Button
         android:text="Pick Date"
@@ -21,29 +23,66 @@
         android:id="@+id/pickDateButton"
         tools:text="Pick Date"
         android:onClick="showDatePickerDialog"
-        android:elevation="0dp"
         android:visibility="visible"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_weight="0.01" />
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="4dp"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:textColor="#fff"/>
+
 
     <TextView
         android:text="La date"
-        android:layout_width="match_parent"
+        android:layout_width="207dp"
         android:layout_height="wrap_content"
         android:id="@+id/dateTextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginLeft="73dp"
+        android:layout_marginRight="70dp"
+        android:layout_weight="0.12"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:text="Pick Time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="showTimePickerDialog"
-        android:id="@+id/pickTimeButton" />
+        android:id="@+id/pickTimeButton"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="4dp"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:textColor="#fff"/>
 
     <TextView
         android:text="L'heure"
-        android:layout_width="match_parent"
+        android:layout_width="205dp"
         android:layout_height="wrap_content"
-        android:id="@+id/timeTextView" />
+        android:id="@+id/timeTextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_marginLeft="73dp"
+        android:layout_marginRight="73dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_weight="0.12"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp" />
+
+    <Button
+        android:text="Notify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button4"
+        android:onClick="scheduleNotification"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="4dp"
+        android:layout_marginTop="50dp"
+        android:paddingLeft="80dp"
+        android:paddingRight="80dp"
+        android:textColor="#fff"/>
 
 </LinearLayout>

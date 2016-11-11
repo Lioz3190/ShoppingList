@@ -1,5 +1,6 @@
 package com.example.lioz.shoppinglist.fragments;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -19,6 +20,19 @@ import java.util.Calendar;
 public class TimePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
 
+
+    onTimePass timePasser;
+
+    public interface onTimePass {
+        public void onTimePass(String data);
+    }
+
+    @Override
+    public void onAttach(Activity a) {
+        super.onAttach(a);
+        timePasser = (onTimePass) a;
+    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current time as the default values for the picker
@@ -34,7 +48,7 @@ public class TimePickerFragment extends DialogFragment
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         // Do something with the time chosen by the user
         TextView tv1=(TextView) getActivity().findViewById(R.id.timeTextView);
-        tv1.setText("Hour: "+view.getCurrentHour()+" Minute: "+view.getCurrentMinute());
-
+        tv1.setText(view.getCurrentHour()+"h : "+view.getCurrentMinute() + "min");
+        timePasser.onTimePass(hourOfDay+"/"+minute);
     }
 }
