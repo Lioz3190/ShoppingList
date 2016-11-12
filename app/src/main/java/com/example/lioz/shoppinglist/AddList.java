@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.*;
 
 import com.example.lioz.shoppinglist.DataBase.AddListDB;
+import com.example.lioz.shoppinglist.DataBase.AddListInformation;
 import com.example.lioz.shoppinglist.DataBase.DataBase;
+import com.example.lioz.shoppinglist.DataBase.MyListInformation;
 
 import java.util.ArrayList;
 
@@ -18,19 +20,11 @@ import java.util.ArrayList;
  */
 
 public class AddList extends AppCompatActivity {
-    private ArrayList<MyList> list ;
 
-    EditText myListName;
-    int idListOfList;
-    public AddList(int idListOfList_)
-    {
-        this.idListOfList = idListOfList_;
-        list = new ArrayList<MyList>();
-    }
-    public int getIdListOfList() {
-        return idListOfList;
-    }
-
+    private EditText myListName;
+    private AddListInformation addList;
+    private MyListInformation myList;
+    private AddListDB dbList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,15 +35,14 @@ public class AddList extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 System.out.println("i'm inserting into the list\n");
-                insertList(new MyList(AddList.this.myListName.getText().toString(),idListOfList));
+                dbList.open();
+                dbList.addList(addList,myList);
+                dbList.close();
                 Intent intentAddList = new Intent(AddList.this,MyList.class);
                 startActivity(intentAddList);
             }
         });
+    }
 
-    }
-    public void insertList(MyList myList){
-        list.add(myList);
-    }
 
 }

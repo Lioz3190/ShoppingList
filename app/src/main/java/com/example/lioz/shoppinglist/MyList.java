@@ -18,11 +18,7 @@ public class MyList extends AppCompatActivity {
     private String listName;
     private int idParentList;
 
-    public MyList(String listName_, int idParentList_){
-        this.listName = listName_;
-        this.idParentList = idParentList_;
-        listItems = new ArrayList<>();
-    }
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -40,22 +36,6 @@ public class MyList extends AppCompatActivity {
         });
     }
 
-    public int getId(){
-        return id;
-    }
-    public String getListName(){
-        return listName;
-    }
-
-    public void setId(int id){ this.id = id;}
-    public void setListName(String name){ this.listName = name;}
-    public int getIdParentList() {
-        return idParentList;
-    }
-
-    public void setIdParentList(int idParentList) {
-        this.idParentList = idParentList;
-    }
 
 }
 
