@@ -24,24 +24,24 @@ public class AddList extends AppCompatActivity {
     private EditText myListName;
     private AddListInformation addList;
     private MyListInformation myList;
-    private AddListDB dbList;
+    private AddListDB dbList = new AddListDB(this);
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addlist);
         Button btn =(Button)findViewById(R.id.SaveListButton);
         System.out.println("i'm opening db\n");
-        myListName = (EditText)findViewById(R.id.editListName);
+
         btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 System.out.println("i'm inserting into the list\n");
-                dbList.open();
-                dbList.addList(addList,myList);
-                dbList.close();
                 Intent intentAddList = new Intent(AddList.this,MyList.class);
                 startActivity(intentAddList);
             }
         });
+        dbList.open();
+        dbList.addList(addList,myList);
+        dbList.close();
     }
 
 

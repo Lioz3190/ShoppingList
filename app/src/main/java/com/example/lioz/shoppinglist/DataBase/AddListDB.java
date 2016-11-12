@@ -4,9 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.EditText;
 
 import com.example.lioz.shoppinglist.AddList;
 import com.example.lioz.shoppinglist.MyList;
+import com.example.lioz.shoppinglist.R;
 
 /**
  * Created by Lioz on 11/11/2016.
@@ -50,5 +52,15 @@ public class AddListDB {
     // get every list of the main activity
     public Cursor getAddList(){
         return db.rawQuery("SELECT * FROM "+TABLE_NAME,null);
+    }
+
+    public int updateAddList(int id, AddListInformation addList){
+        ContentValues values = new ContentValues();
+        values.put(LIST_NAME,addList.getListName());
+        values.put(COMMENT,addList.getComment());
+        return db.update(TABLE_NAME,values, KEY_ID_MyList + " = "+ id,null);
+    }
+    public int removeAddList(int id, MyListInformation myList){
+        return db.delete(TABLE_NAME, KEY_ID_MyList + " = " + id , null);
     }
 }

@@ -52,9 +52,18 @@ public class MyListDB {
     public Cursor getMyList(){
         return db.rawQuery("SELECT * FROM "+TABLE_NAME,null);
     }
+
     // delete the selected list
     public void deleteList(MyListInformation myListInformation){
         long id = myListInformation.getId();
         db.delete(TABLE_NAME,KEY_ID_MyList + " = " + id,null);
+    }
+    //update the select List
+    public int updateMyList(int id , MyListInformation myList){
+        ContentValues values = new ContentValues();
+        values.put(ARTICLE,myList.getArticle());
+        values.put(QUANTITY,myList.getQuantity());
+        values.put(BOUGHT,myList.isBought());
+        return db.update(TABLE_NAME,values, KEY_ID_MyList + " = "+ id,null);
     }
 }
