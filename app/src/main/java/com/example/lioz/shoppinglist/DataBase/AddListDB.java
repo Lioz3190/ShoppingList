@@ -42,8 +42,8 @@ public class AddListDB {
     }
     // add a new list to the main activity
     public long addList(AddListInformation addList, MyListInformation myList){
+        addList = new AddListInformation(0,addList.getListName(),addList.getIdList(),addList.getComment());
         ContentValues values = new ContentValues();
-        values.put(KEY_ID_ListOfList,addList.getId());
         values.put(LIST_NAME,addList.getListName());
         values.put(KEY_ID_MyList,myList.getId());
         values.put(COMMENT,addList.getComment());

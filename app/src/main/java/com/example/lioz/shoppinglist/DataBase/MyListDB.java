@@ -56,7 +56,7 @@ public class MyListDB {
     // delete the selected list
     public void deleteList(MyListInformation myListInformation){
         long id = myListInformation.getId();
-        db.delete(TABLE_NAME,KEY_ID_MyList + " = " + id,null);
+        db.delete(TABLE_NAME,KEY_ID_MyList + " = "+id ,null);
     }
     //update the select List
     public int updateMyList(int id , MyListInformation myList){

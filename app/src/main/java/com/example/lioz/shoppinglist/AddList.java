@@ -39,9 +39,6 @@ public class AddList extends AppCompatActivity {
                 startActivity(intentAddList);
             }
         });
-        dbList.open();
-        dbList.addList(addList,myList);
-        dbList.close();
     }
 
 
