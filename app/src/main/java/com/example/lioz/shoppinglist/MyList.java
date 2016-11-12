@@ -30,9 +30,9 @@ public class MyList extends AppCompatActivity {
         // Reference
         btn = (Button) findViewById(R.id.addBtn);
         editTxt = (EditText) findViewById(R.id.editTxt);
+        listView = (ListView)findViewById(R.id.listElement);
         // Defining the ArrayAdapter to set items to ListView
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItems);
-        listView = (ListView)findViewById(R.id.listElement);
         listView.setAdapter(adapter);
 
         // Defining a click event listener for the button "Add"

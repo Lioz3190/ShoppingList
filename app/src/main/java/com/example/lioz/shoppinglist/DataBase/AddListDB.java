@@ -25,7 +25,7 @@ public class AddListDB {
 
     // create and drop SQL query
     public static final String CREATE_TABLE_LIST = "CREATE TABLE IF NOT EXISTS " +TABLE_NAME+
-            "("+ KEY_ID_ListOfList +"INTEGER PRIMARY KEY,"+ LIST_NAME + " VARCHAR2(10)"+KEY_ID_MyList+" INTEGER,"+COMMENT+" VARCHAR2(10), FOREIGN KEY ("+KEY_ID_MyList+") REFERENCES "+TABLE_NAME_CHILD+"("+KEY_ID_MyList+");";
+            "("+ KEY_ID_ListOfList +"INTEGER PRIMARY KEY,"+ LIST_NAME + " VARCHAR2(10),"+KEY_ID_MyList+" INTEGER,"+COMMENT+" VARCHAR2(10), FOREIGN KEY ("+KEY_ID_MyList+") REFERENCES "+TABLE_NAME_CHILD+"("+KEY_ID_MyList+"));";
     public static final String DROP_TABLE_LIST = "DROP TABLE IF EXISTS "+TABLE_NAME+";";
     // my database
     private DataBase mDb;
