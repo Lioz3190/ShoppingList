@@ -7,16 +7,17 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!--android:icon="@drawable/ic_launcher"-->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -51,6 +52,16 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".PlacesAPIActivity"
+            android:label="Place Picker"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <receiver android:name=".Notify.NotificationPublisher" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -60,9 +71,12 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/. 
         -->
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD23AjpS7wPLiCT3XvDfAD-EuD-2NOrZGQ" />
+            android:value="AIzaSyBjFpijP8z5JCc0JWqqwYmQwnWnhAZzATY"/>
+        <!--android:value="AIzaSyD23AjpS7wPLiCT3XvDfAD-EuD-2NOrZGQ" />-->
+
 
         <activity
             android:name=".MyShop"
@@ -75,6 +89,7 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
 
     </application>
 

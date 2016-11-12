@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.action_myshop:
-                Intent intentShop = new Intent(MainActivity.this,MyShop.class);
+                Intent intentShop = new Intent(MainActivity.this,PlacesAPIActivity.class);
                 startActivity(intentShop);
                 break;
             case R.id.action_addlist:
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity
        switch(item.getItemId()) {
 
            case R.id.action_myshop:
-               Intent intentShop = new Intent(MainActivity.this,MyShop.class);
+               Intent intentShop = new Intent(MainActivity.this,PlacesAPIActivity.class);
                startActivity(intentShop);
                break;
            case R.id.action_addlist:
