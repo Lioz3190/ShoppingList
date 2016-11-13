@@ -180,11 +180,7 @@ public class DataBase extends SQLiteOpenHelper {
                         KEY_ID_List, ARTICLE}, KEY_ID_List + "=?",
                 new String[]{String.valueOf(id)}, null, null, null,
                 null);
-        System.out.println(cursor.getCount());
-        if (cursor.getCount() == 0) {
-            return itemList;
-        }else{
-            cursor.moveToFirst();
+        if ( cursor.moveToFirst()){
             do {
                 Item item = new Item(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID_Item))),
                         cursor.getString(cursor.getColumnIndex(ARTICLE)),
