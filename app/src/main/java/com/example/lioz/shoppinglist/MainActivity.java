@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 
 import com.example.lioz.shoppinglist.DataBase.DataBase;
@@ -34,6 +37,19 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        FloatingActionButton fab2 = (FloatingActionButton)findViewById(R.id.action_removelist);
+        fab2.setImageResource(R.drawable.trash_can);
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                java.util.List<List> list = db.getAllList();
+                for (int i = 1 ; i <= list.size();i++) {
+                    if (((CheckBox) view).isChecked()) {
+                        db.deleteListWithId(i);
+                    }
+                }
+            }
+        });
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.action_addlist);
         fab.setImageResource(R.drawable.addlistwhite);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +77,7 @@ public class MainActivity extends AppCompatActivity
             list = db.getAllList();
         }
         Log.i("Test",list.toString());
-        ListAdapter adapter = new ListAdapter(this,R.layout.item_list_of_list,list);
+        ListAdapter adapter = new ListAdapter(this,R.layout.remove_item_list_of_list,list);
         ListView lv = (ListView)findViewById(R.id.mainList);
         lv.setAdapter(adapter);
     }
@@ -92,10 +108,6 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_myshop:
                 Intent intentShop = new Intent(MainActivity.this,PlacesAPIActivity.class);
                 startActivity(intentShop);
-                break;
-            case R.id.action_addlist:
-                Intent intentAddList = new Intent(MainActivity.this,AddList.class);
-                startActivity(intentAddList);
                 break;
             default:
                 break;

@@ -150,6 +150,10 @@ public class DataBase extends SQLiteOpenHelper {
                 new String[]{String.valueOf(list.getId())});
         db.close();
     }
+    public int deleteListWithId(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME_LIST, KEY_ID_List + " = " + id , null);
+    }
 
     // Getting list Count
     public int getListCount() {
