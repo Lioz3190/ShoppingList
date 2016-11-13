@@ -19,11 +19,13 @@ import android.widget.ListView;
 import com.example.lioz.shoppinglist.DataBase.DataBase;
 import com.example.lioz.shoppinglist.DataBase.List;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DataBase db;
-    java.util.List<List> list;
+    ArrayList<List> list;
     ListAdapter adapter ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

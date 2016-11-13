@@ -108,8 +108,8 @@ public class DataBase extends SQLiteOpenHelper {
         return list;
     }
 
-    public java.util.List<List> getAllList() {
-        java.util.List<List> fullList = new ArrayList<List>();
+    public ArrayList<List> getAllList() {
+        ArrayList<List> fullList = new ArrayList<List>();
         // Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_NAME_LIST;
 

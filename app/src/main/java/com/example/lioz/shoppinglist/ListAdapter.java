@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.example.lioz.shoppinglist.DataBase.DataBase;
 import com.example.lioz.shoppinglist.DataBase.List;
 
+import java.util.ArrayList;
+
 /**
  * Created by VALENTIN on 13/11/2016.
  */
@@ -21,10 +23,10 @@ public class ListAdapter extends ArrayAdapter<List> {
 
     Context context;
     private int layoutResourceId;
-    java.util.List <List> shoppingList;
+    ArrayList<List> shoppingList;
     private DataBase db;
 
-    public ListAdapter(Context context, int resource, java.util.List <List> list) {
+    public ListAdapter(Context context, int resource, ArrayList<List> list) {
         super(context, resource, list);
         this.context = context;
         this.shoppingList = list;
@@ -68,6 +70,7 @@ public class ListAdapter extends ArrayAdapter<List> {
                 shoppingList.remove(index);
                 db.deleteListWithId(list.getId());
                 notifyDataSetChanged();
+                db.close();
             }
         });
 
