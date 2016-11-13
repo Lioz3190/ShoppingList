@@ -18,6 +18,13 @@ public class Item {
         this.bought = false;
     }
 
+    public Item(int idl_, String article_, int quantity_){
+        this.idList = idl_;
+        this.article = article_;
+        this.quantity = quantity_;
+        this.bought = false;
+    }
+
     public int getIdItem(){
         return this.idItem;
     }

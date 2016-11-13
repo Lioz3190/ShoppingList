@@ -36,7 +36,7 @@ public class DataBase extends SQLiteOpenHelper {
     // create and drop table SQL query Item
     public static final String CREATE_TABLE_ITEM = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_ITEM +
             "(" + KEY_ID_Item + " INTEGER," + KEY_ID_List + " INTEGER," +
-            ARTICLE + " TEXT," + QUANTITY + " INTEGER, FOREIGN KEY (" + KEY_ID_List + ") REFERENCES "+ TABLE_NAME_LIST+" ("+KEY_ID_List+"), PRIMARY KEY (" + KEY_ID_Item + "," + KEY_ID_List + "));";
+            ARTICLE + " TEXT," + QUANTITY + " INTEGER,"+BOUGHT+" INTEGER, FOREIGN KEY (" + KEY_ID_List + ") REFERENCES "+ TABLE_NAME_LIST+" ("+KEY_ID_List+"), PRIMARY KEY (" + KEY_ID_Item + "," + KEY_ID_List + "));";
 
     public static final String DROP_TABLE_ITEM = "DROP TABLE IF EXISTS " + TABLE_NAME_ITEM + ";";
 
@@ -46,7 +46,6 @@ public class DataBase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "ShoppingListDB";
     private static final int DATABASE_VERSION = 1;
     private static DataBase sInstance;
-    private static final String query = "INSERT INTO List (IdList,ListName,Comment) VALUES(0,\"birthday\",\"ta mere\");";
 
     // synchronize database
     public static synchronized DataBase getInstance(Context context) {
@@ -62,10 +61,8 @@ public class DataBase extends SQLiteOpenHelper {
 
     // create table
     public void onCreate(SQLiteDatabase db) {
-        System.out.println("CREATED");
         db.execSQL(CREATE_TABLE_LIST);
         db.execSQL(CREATE_TABLE_ITEM);
-        db.execSQL(query);
 
     }
 
@@ -88,7 +85,6 @@ public class DataBase extends SQLiteOpenHelper {
     public void addItem(Item item) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_ID_Item, item.getIdItem());
         values.put(KEY_ID_List, item.getIdList());
         values.put(ARTICLE, item.getArticle());
         values.put(QUANTITY, item.getQuantity());
@@ -125,7 +121,7 @@ public class DataBase extends SQLiteOpenHelper {
         else {
             cursor.moveToFirst();
             do {
-                List list = new List(Integer.parseInt(cursor
+               List list = new List(Integer.parseInt(cursor
                         .getString(0)), cursor.getString(1),
                         cursor.getString(2));
                 fullList.add(list);

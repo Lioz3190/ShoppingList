@@ -1,5 +1,6 @@
 package com.example.lioz.shoppinglist;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -23,8 +25,8 @@ import com.example.lioz.shoppinglist.DataBase.ListManagerTest;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private DataBase mDb;
-    private ListManagerTest db;
+    private DataBase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,16 +54,16 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        /*db = new ListManagerTest(this);
+        db = new DataBase(this);
         java.util.List<List> list = db.getAllList();
         if ( list.size() == 0 ){
-            db.addList(new List(0,"birthday","Paul"));
+            db.addList(new List("birthday","Paul"));
             list = db.getAllList();
         }
         Log.i("Test",list.toString());
-        ArrayAdapter<List> adapter = new ArrayAdapter<List>(this,android.R.layout.simple_list_item_1,list);
+        ListAdapter adapter = new ListAdapter(this,R.layout.item_list_of_list,list);
         ListView lv = (ListView)findViewById(R.id.mainList);
-        lv.setAdapter(adapter);*/
+        lv.setAdapter(adapter);
     }
 
     @Override
@@ -122,5 +124,9 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void displayListView (){
+
     }
 }

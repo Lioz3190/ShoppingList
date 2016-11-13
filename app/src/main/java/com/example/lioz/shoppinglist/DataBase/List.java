@@ -18,6 +18,11 @@ public class List {
         this.comment = comment_;
     }
 
+    public List( String listName_, String comment_){
+        this.listName = listName_;
+        this.comment = comment_;
+    }
+
     public int getId(){
         return this.id;
     }

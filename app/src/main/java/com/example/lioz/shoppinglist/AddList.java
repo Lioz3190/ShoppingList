@@ -21,9 +21,7 @@ import com.example.lioz.shoppinglist.DataBase.ListManagerTest;
 
 public class AddList extends AppCompatActivity {
 
-    private EditText myListName;
-    private List addList;
-    private Item myList;
+    private TextView name, comment;
     private DataBase db ;
     private ListView lv;
     @Override
@@ -32,15 +30,14 @@ public class AddList extends AppCompatActivity {
         db = new DataBase(this);
         setContentView(R.layout.activity_addlist);
         Button btn =(Button)findViewById(R.id.SaveListButton);
-        System.out.println("i'm opening db");
-        System.out.println("Ajout");
-        db.addList(new List(1,"Birthday","Paul"));
-        System.out.println(db.getAllList().get(0).getComment());
-        System.out.println("Fin");
+        name = (TextView) findViewById(R.id.editListName);
+        comment = (TextView) findViewById(R.id.editComment);
+        System.out.println("i'm opening db ");
 
         btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 System.out.println("i'm inserting into the list\n");
+                db.addList(new List(name.getText().toString(),comment.getText().toString()));
                 Intent intentAddList = new Intent(AddList.this,MyList.class);
                 startActivity(intentAddList);
             }
