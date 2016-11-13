@@ -18,20 +18,20 @@ public class DataBase extends SQLiteOpenHelper {
 
     // table et attribut
     private static final String TABLE_NAME_LIST = "List";
-    public static final String KEY_ID_List = "IdList";
+    public static final String KEY_ID_List = "idList";
     public static final String LIST_NAME = "ListName";
     public static final String COMMENT = "Comment";
 
     // create and drop SQL query List
     public static final String CREATE_TABLE_LIST = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_LIST +
-            " (" + KEY_ID_List + " INTEGER PRIMARY KEY AUTOINCREMENT," + LIST_NAME + " TEXT," + COMMENT + " TEXT);";
+            " (" + KEY_ID_List + " INTEGER PRIMARY KEY," + LIST_NAME + " TEXT," + COMMENT + " TEXT);";
     public static final String DROP_TABLE_LIST = "DROP TABLE IF EXISTS " + TABLE_NAME_LIST + ";";
 
     private static final String TABLE_NAME_ITEM = "Item";
     public static final String KEY_ID_Item = "idItem";
     public static final String ARTICLE = "article";
     public static final String QUANTITY = "quantite";
-    public static final String BOUGHT = "check";
+    public static final String BOUGHT = "checkboxe";
 
     // create and drop table SQL query Item
     public static final String CREATE_TABLE_ITEM = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_ITEM +
@@ -43,7 +43,7 @@ public class DataBase extends SQLiteOpenHelper {
 
 
     // database initial creation ( void database )
-    private static final String DATABASE_NAME = "ShoppingListDB";
+    private static final String DATABASE_NAME = "ShoppingList3";
     private static final int DATABASE_VERSION = 1;
     private static DataBase sInstance;
 
@@ -117,7 +117,7 @@ public class DataBase extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_NAME_LIST,null,null,null,null,null, null);
 
         // looping through all rows and adding to list
-        if (cursor.getCount() == 0) return null;
+        if (cursor.getCount() == 0) return fullList;
         else {
             cursor.moveToFirst();
             do {
@@ -170,7 +170,8 @@ public class DataBase extends SQLiteOpenHelper {
     public java.util.List<Item> getAllItemWithListId(int id) {
         java.util.List<Item> itemList = new ArrayList<Item>();
         String selectQ = "SELECT  * FROM " + TABLE_NAME_ITEM + " WHERE "
-                + KEY_ID_List + " = " + String.valueOf(id) + ";";
+                + KEY_ID_List + " = " + String.valueOf(id);
+        System.out.println(selectQ);
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQ, null);
@@ -179,10 +180,13 @@ public class DataBase extends SQLiteOpenHelper {
                         KEY_ID_List, ARTICLE}, KEY_ID_List + "=?",
                 new String[]{String.valueOf(id)}, null, null, null,
                 null);
-        if (cursor.moveToFirst()) {
+        System.out.println(cursor.getCount());
+        if (cursor.getCount() == 0) {
+            return itemList;
+        }else{
+            cursor.moveToFirst();
             do {
                 Item item = new Item(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID_Item))),
-                        Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID_List))),
                         cursor.getString(cursor.getColumnIndex(ARTICLE)),
                         Integer.parseInt(cursor.getString(cursor.getColumnIndex(QUANTITY))));
                 itemList.add(item);

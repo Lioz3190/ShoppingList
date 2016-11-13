@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db = new DataBase(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -63,16 +64,12 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        db = new DataBase(this);
         java.util.List<List> list = db.getAllList();
-        if ( list.size() == 0 ){
-            db.addList(new List("birthday","Paul"));
-            list = db.getAllList();
+        if (list.size() != 0){
+            ListAdapter adapter = new ListAdapter(this,R.layout.item_list_of_list,list);
+            ListView lv = (ListView)findViewById(R.id.mainList);
+            lv.setAdapter(adapter);
         }
-        Log.i("Test",list.toString());
-        ListAdapter adapter = new ListAdapter(this,R.layout.remove_item_list_of_list,list);
-        ListView lv = (ListView)findViewById(R.id.mainList);
-        lv.setAdapter(adapter);
     }
 
     @Override

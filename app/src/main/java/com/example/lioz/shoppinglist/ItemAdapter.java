@@ -44,7 +44,12 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         Item items = listItems.get(position);
         item.setText(items.getArticle());
         quantity.setText(items.getQuantity());
-        bought.setChecked(items.isBought());
+        if (items.isBought()>0){
+            bought.setChecked(true);
+        }else{
+            bought.setChecked(false);
+        }
+
 
         return view;
     }

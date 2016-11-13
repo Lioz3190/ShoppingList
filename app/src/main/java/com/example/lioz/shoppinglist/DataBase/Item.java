@@ -7,22 +7,21 @@ import java.util.ArrayList;
  */
 
 public class Item {
-    private int idItem, idList,quantity;
+    private int idItem, idList,quantity,bought;
     String article;
-    boolean bought;
     public Item(int idi_,int idl_, String article_, int quantity_){
         this.idItem = idi_;
         this.idList = idl_;
         this.article = article_;
         this.quantity = quantity_;
-        this.bought = false;
+        this.bought = 0;
     }
 
     public Item(int idl_, String article_, int quantity_){
         this.idList = idl_;
         this.article = article_;
         this.quantity = quantity_;
-        this.bought = false;
+        this.bought = 0;
     }
 
     public int getIdItem(){
@@ -57,11 +56,11 @@ public class Item {
         this.article = article;
     }
 
-    public boolean isBought() {
+    public int isBought() {
         return bought;
     }
 
-    public void setBought(boolean bought) {
+    public void setBought(int bought) {
         this.bought = bought;
     }
 }
