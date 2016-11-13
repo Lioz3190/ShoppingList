@@ -1,19 +1,25 @@
 package com.example.lioz.shoppinglist;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.lioz.shoppinglist.DataBase.DataBase;
-import com.example.lioz.shoppinglist.DataBase.ListManager;
 import com.example.lioz.shoppinglist.DataBase.List;
-import com.example.lioz.shoppinglist.DataBase.Item;
-import com.example.lioz.shoppinglist.DataBase.ListManagerTest;
+import android.support.design.widget.NavigationView;
+
 
 /**
  * Created by Lioz on 09/11/2016.
@@ -27,8 +33,10 @@ public class AddList extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        db = new DataBase(this);
         setContentView(R.layout.activity_addlist);
+
+        db = new DataBase(this);
+
         Button btn =(Button)findViewById(R.id.SaveListButton);
         name = (TextView) findViewById(R.id.editListName);
         comment = (TextView) findViewById(R.id.editComment);
