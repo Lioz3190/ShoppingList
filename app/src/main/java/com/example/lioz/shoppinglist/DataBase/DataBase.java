@@ -28,12 +28,12 @@ public class DataBase extends SQLiteOpenHelper  {
 
     // create table
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(AddListDB.CREATE_TABLE_LIST);
+        db.execSQL(ListManager.CREATE_TABLE_LIST);
     }
 
     // refactor database
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(AddListDB.DROP_TABLE_LIST);
+        db.execSQL(ListManager.DROP_TABLE_LIST);
         db.execSQL(" DROP TABLE IF EXISTS MyList;");
         onCreate(db);
     }

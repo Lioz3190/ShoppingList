@@ -6,23 +6,32 @@ import java.util.ArrayList;
  * Created by Lioz on 12/11/2016.
  */
 
-public class MyListInformation {
-    private int id,quantity;
+public class Item {
+    private int idItem, idList,quantity;
     String article;
     boolean bought;
-    public MyListInformation(int id_,String article_,int quantity_){
-        this.id = id_;
+    public Item(int idi_,int idl_, String article_, int quantity_){
+        this.idItem = idi_;
+        this.idList = idl_;
         this.article = article_;
         this.quantity = quantity_;
         this.bought = false;
     }
 
-    public int getId(){
-        return this.id;
+    public int getIdItem(){
+        return this.idItem;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdItem(int id) {
+        this.idItem = id;
+    }
+
+    public int getIdList(){
+        return this.idList;
+    }
+
+    public void setIdList(int id) {
+        this.idList = id;
     }
 
     public int getQuantity() {

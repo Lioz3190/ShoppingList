@@ -3,12 +3,9 @@ package com.example.lioz.shoppinglist;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import java.util.ArrayList;
-import java.util.List;
 
 import android.view.View;
 import android.widget.*;
-
-import com.example.lioz.shoppinglist.DataBase.MyListDB;
 
 /**
  * Created by Lioz on 05/11/2016.
