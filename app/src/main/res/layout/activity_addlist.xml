@@ -29,25 +29,27 @@
                 android:id="@+id/editListName"
                 android:layout_weight="0.1" />
         </LinearLayout>
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="50dp"
+            android:layout_weight="0.07">
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:id="@+id/Comment"
-                android:layout_weight="0.3"
                 android:text="Comment" />
             <EditText
                 android:layout_width="fill_parent"
-                android:layout_height="172dp"
+                android:layout_height="77dp"
                 android:id="@+id/editComment"
                 android:background="@drawable/textinputborder"/>
         </LinearLayout>
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"

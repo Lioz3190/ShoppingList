@@ -40,10 +40,10 @@ public class DataBase extends SQLiteOpenHelper {
 
     public static final String DROP_TABLE_ITEM = "DROP TABLE IF EXISTS " + TABLE_NAME_ITEM + ";";
 
-
+    public static  Integer i = 0;
 
     // database initial creation ( void database )
-    private static final String DATABASE_NAME = "ShoppingListV2";
+    private static final String DATABASE_NAME = "ShoppingListV7";
     private static final int DATABASE_VERSION = 1;
     private static DataBase sInstance;
 
@@ -151,9 +151,7 @@ public class DataBase extends SQLiteOpenHelper {
         values.put(ARTICLE, item.getArticle());
         values.put(QUANTITY, item.getQuantity());
         values.put(BOUGHT, item.isBought());
-
-        return db.update(TABLE_NAME_ITEM, values, KEY_ID_Item + " = ?",
-                new String[]{String.valueOf(item.getIdItem())});
+        return db.update(TABLE_NAME_ITEM, values, KEY_ID_Item + " = "+item.getIdItem(),null);
     }
 
     // Deleting single list
@@ -189,26 +187,25 @@ public class DataBase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQ, null);
 
-        Cursor cursor2 = db.query(TABLE_NAME_ITEM, new String[]{KEY_ID_Item,
-                        KEY_ID_List, ARTICLE}, KEY_ID_List + "=?",
-                new String[]{String.valueOf(id)}, null, null, null,
-                null);
         System.out.println(cursor.getCount());
         if ( cursor.getCount() != 0){
             cursor.moveToFirst();
             do {
                 Item item = new Item(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID_Item))),
                         cursor.getString(cursor.getColumnIndex(ARTICLE)),
-                        Integer.parseInt(cursor.getString(cursor.getColumnIndex(QUANTITY))));
+                        Integer.parseInt(cursor.getString(cursor.getColumnIndex(QUANTITY))),
+                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(BOUGHT))));
                 itemList.add(item);
             } while (cursor.moveToNext());
         }
         return itemList;
     }
 
-    public java.util.List<Item> getAllItems() {
+    public java.util.List<Item> getAllItems(int id) {
         java.util.List<Item> itemList = new ArrayList<Item>();
-        String selectQ = "SELECT  * FROM " + TABLE_NAME_ITEM;
+        //String selectQ = "SELECT  * FROM " + TABLE_NAME_ITEM;
+        String selectQ = "SELECT * FROM " + TABLE_NAME_ITEM + " WHERE "
+                + KEY_ID_List + " = " + String.valueOf(id);
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQ, null);
@@ -218,12 +215,14 @@ public class DataBase extends SQLiteOpenHelper {
                 Item item = new Item(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID_Item))),
                         Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID_List))),
                         cursor.getString(cursor.getColumnIndex(ARTICLE)),
-                        Integer.parseInt(cursor.getString(cursor.getColumnIndex(QUANTITY))));
+                        Integer.parseInt(cursor.getString(cursor.getColumnIndex(QUANTITY))),
+                        Integer.parseInt(cursor.getString(cursor.getColumnIndex(BOUGHT))));
                 itemList.add(item);
             } while (cursor.moveToNext());
         }
         return itemList;
     }
+
 
 
 }

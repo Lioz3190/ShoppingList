@@ -9,19 +9,19 @@ import java.util.ArrayList;
 public class Item {
     private int idItem, idList,quantity,bought;
     String article;
-    public Item(int idi_,int idl_, String article_, int quantity_){
+    public Item(int idi_,int idl_, String article_, int quantity_,int zero){
         this.idItem = idi_;
         this.idList = idl_;
         this.article = article_;
         this.quantity = quantity_;
-        this.bought = 0;
+        this.bought = zero;
     }
 
-    public Item(int idl_, String article_, int quantity_){
+    public Item(int idl_, String article_, int quantity_, int zero){
         this.idList = idl_;
         this.article = article_;
         this.quantity = quantity_;
-        this.bought = 0;
+        this.bought = zero;
     }
 
     public int getIdItem(){

@@ -25,7 +25,6 @@ public class MyList extends AppCompatActivity {
     private EditText editTxt;
     private Button btn;
     private DataBase db;
-    private CheckBox bought;
     private Integer idList;
 
     // Called when the activity is first created
@@ -40,13 +39,12 @@ public class MyList extends AppCompatActivity {
         btn = (Button) findViewById(R.id.addBtn);
         editTxt = (EditText) findViewById(R.id.editTxt);
         listView = (ListView) findViewById(R.id.listElement);
-        bought = (CheckBox) findViewById(R.id.boughtItem);
         // Defining the ArrayAdapter to set items to ListView
 
         db = new DataBase(this);
-        java.util.List<Item> list = db.getAllItemWithListId(idList);
+        java.util.List<Item> list = db.getAllItems(idList);
         if (list.size() != 0) {
-            final ItemAdapter adapter = new ItemAdapter(this, R.layout.list_items, list);
+            final ItemAdapter adapter = new ItemAdapter(this, R.layout.list_items, list,idList);
             ListView lv = (ListView) findViewById(R.id.listElement);
             lv.setAdapter(adapter);
         }
@@ -56,7 +54,7 @@ public class MyList extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.addItem(new Item(idList, editTxt.getText().toString(), 1));
+                db.addItem(new Item(idList, editTxt.getText().toString(), 1,0));
                 finish();
                 startActivity(getIntent());
             }

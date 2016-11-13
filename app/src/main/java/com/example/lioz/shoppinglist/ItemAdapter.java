@@ -21,15 +21,16 @@ import com.example.lioz.shoppinglist.DataBase.List;
 public class ItemAdapter extends ArrayAdapter<Item> {
 
     Context context;
-    private int layoutResourceId;
+    private int layoutResourceId, idlist;
     java.util.List <Item> listItems;
     private DataBase db = new DataBase(getContext());
 
-    public ItemAdapter(Context context, int resource, java.util.List <Item> list) {
+    public ItemAdapter(Context context, int resource, java.util.List <Item> list,int idList) {
         super(context, resource, list);
         this.context = context;
         this.listItems = list;
         this.layoutResourceId = resource;
+        this.idlist = idList;
     }
 
     @Override
@@ -44,25 +45,24 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         TextView item = (TextView) view.findViewById(R.id.nameItem);
         TextView quantity = (TextView) view.findViewById(R.id.quantityItem);
         CheckBox bought = (CheckBox) view.findViewById(R.id.boughtItem);
-        Item items = listItems.get(position);
-        item.setText(items.getArticle());
-        quantity.setText(String.valueOf(items.getQuantity()));
-        if (items.isBought()>0){
-            bought.setChecked(true);
-        }else{
-            bought.setChecked(false);
-        }
+            Item items = listItems.get(position);
+            item.setText(items.getArticle());
+            quantity.setText(String.valueOf(items.getQuantity()));
+            System.out.println(items.isBought());
+            if (items.isBought()>0){
+                bought.setChecked(true);
+            }else{
+                bought.setChecked(false);
+            }
+
 
         bought.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (buttonView.isChecked()) {
-                    System.out.println(listItems.get(position).isBought());
-                    System.out.println(listItems.get(position).getIdItem());
-                    System.out.println(listItems.get(position).getArticle());
-                    System.out.println("Check");
                     listItems.get(position).setBought(1);
                     db.updateItem(listItems.get(position));
+
                 } else {
                     listItems.get(position).setBought(0);
                     db.updateItem(listItems.get(position));
