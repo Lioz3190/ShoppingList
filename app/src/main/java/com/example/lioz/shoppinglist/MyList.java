@@ -1,17 +1,7 @@
 package com.example.lioz.shoppinglist;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import java.util.ArrayList;
-
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,15 +11,11 @@ import android.widget.ListView;
 import com.example.lioz.shoppinglist.DataBase.DataBase;
 import com.example.lioz.shoppinglist.DataBase.Item;
 
-import java.util.ArrayList;
-
 /**
  * Created by Lioz on 05/11/2016.
  */
 public class MyList extends AppCompatActivity {
-    private ArrayList<String> listItems = new ArrayList<>();
     ArrayAdapter<String> adapter;
-    private ListView listView;
     private EditText editTxt;
     private Button btn;
     private DataBase db;
@@ -46,7 +32,6 @@ public class MyList extends AppCompatActivity {
         // Reference
         btn = (Button) findViewById(R.id.addBtn);
         editTxt = (EditText) findViewById(R.id.editTxt);
-        listView = (ListView) findViewById(R.id.listElement);
         // Defining the ArrayAdapter to set items to ListView
 
         db = new DataBase(this);
