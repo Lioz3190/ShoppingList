@@ -36,7 +36,7 @@
         <activity
             android:name=".MyList"
             android:label="Add items"
-            android:parentActivityName=".AddList">
+            android:parentActivityName=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

@@ -99,6 +99,10 @@ public class MainActivity extends AppCompatActivity
                 Intent intentShop = new Intent(MainActivity.this,PlacesAPIActivity.class);
                 startActivity(intentShop);
                 break;
+            case R.id.alert_date:
+                Intent intentAlertDate = new Intent(MainActivity.this,AlertDate.class);
+                startActivity(intentAlertDate);
+                break;
             default:
                 break;
         }

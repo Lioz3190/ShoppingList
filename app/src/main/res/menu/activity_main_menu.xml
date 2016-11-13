@@ -10,4 +10,10 @@
         android:title="@string/action_myshop"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/alert_date"
+        android:icon="@drawable/alarm"
+        android:title="open alert date activity"
+        app:showAsAction="always"/>
+
     </menu>

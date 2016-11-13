@@ -10,8 +10,7 @@
         android:layout_width="fill_parent"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:layout_weight="0.9"
-        android:layout_height="60dp"
-        android:onClick="itemClicked"/>
+        android:layout_height="60dp"/>
 
     <LinearLayout
         android:orientation="vertical"

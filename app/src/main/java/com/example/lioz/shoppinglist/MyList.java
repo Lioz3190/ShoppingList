@@ -36,9 +36,12 @@ public class MyList extends AppCompatActivity {
 
         db = new DataBase(this);
         java.util.List<Item> list = db.getAllItemWithListId(idList);
+        if (list.size() != 0) {
             final ItemAdapter adapter = new ItemAdapter(this, R.layout.list_items, list);
             ListView lv = (ListView) findViewById(R.id.listElement);
             lv.setAdapter(adapter);
+        }
+
         // Defining a click event listener for the button "Add"
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
