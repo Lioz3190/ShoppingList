@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,11 +14,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.lioz.shoppinglist.DataBase.DataBase;
+import com.example.lioz.shoppinglist.DataBase.List;
+import com.example.lioz.shoppinglist.DataBase.ListManagerTest;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private DataBase mDb;
+    private ListManagerTest db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +51,17 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        DataBase db = new DataBase(this);
 
+        /*db = new ListManagerTest(this);
+        java.util.List<List> list = db.getAllList();
+        if ( list.size() == 0 ){
+            db.addList(new List(0,"birthday","Paul"));
+            list = db.getAllList();
+        }
+        Log.i("Test",list.toString());
+        ArrayAdapter<List> adapter = new ArrayAdapter<List>(this,android.R.layout.simple_list_item_1,list);
+        ListView lv = (ListView)findViewById(R.id.mainList);
+        lv.setAdapter(adapter);*/
     }
 
     @Override

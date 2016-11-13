@@ -13,6 +13,7 @@ import com.example.lioz.shoppinglist.DataBase.DataBase;
 import com.example.lioz.shoppinglist.DataBase.ListManager;
 import com.example.lioz.shoppinglist.DataBase.List;
 import com.example.lioz.shoppinglist.DataBase.Item;
+import com.example.lioz.shoppinglist.DataBase.ListManagerTest;
 
 /**
  * Created by Lioz on 09/11/2016.
@@ -23,7 +24,8 @@ public class AddList extends AppCompatActivity {
     private EditText myListName;
     private List addList;
     private Item myList;
-    private ListManager dbList = new ListManager(this);
+    private ListManagerTest db ;
+    private ListView lv;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,15 +41,7 @@ public class AddList extends AppCompatActivity {
             }
         });
 
-        dbList.open();
-        dbList.addList(new List(1,"birthDay","Paul"));
-        ListManager lm = new ListManager(this);
-        lm.open();
-        java.util.List<List> values = lm.getList();
-        ArrayAdapter<List> adapter = new ArrayAdapter<List>(this,android.R.layout.simple_list_item_1,values);
-        ListView lv = (ListView)findViewById(R.id.mainList);
-        lv.setAdapter(adapter);
-        dbList.close();
+
     }
 
 
