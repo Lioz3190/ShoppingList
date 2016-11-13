@@ -9,18 +9,22 @@ import java.util.ArrayList;
  */
 
 public class List {
+    private int id ;
     private String listName;
     private String comment;
-    private int id;
-
-
-    public List(int id, String listName_, String comment_){
-        this.id = id;
-
+    public List(int id_ , String listName_, String comment_){
+        this.id = id_;
         this.listName = listName_;
         this.comment = comment_;
     }
 
+    public int getId(){
+        return this.id;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
 
     public String getListName(){
         return this.listName;
@@ -35,13 +39,5 @@ public class List {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

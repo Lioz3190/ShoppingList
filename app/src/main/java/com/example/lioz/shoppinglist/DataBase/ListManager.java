@@ -41,7 +41,6 @@ public class ListManager {
         ContentValues values = new ContentValues();
         values.put(LIST_NAME,list.getListName());
         values.put(COMMENT,list.getComment());
-        System.out.println(values);
         return db.insert(TABLE_NAME,null,values);
     }
     // get every list of the main activity

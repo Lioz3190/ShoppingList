@@ -24,14 +24,19 @@ public class AddList extends AppCompatActivity {
     private EditText myListName;
     private List addList;
     private Item myList;
-    private ListManagerTest db ;
+    private DataBase db ;
     private ListView lv;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        db = new DataBase(this);
         setContentView(R.layout.activity_addlist);
         Button btn =(Button)findViewById(R.id.SaveListButton);
-        System.out.println("i'm opening db\n");
+        System.out.println("i'm opening db");
+        System.out.println("Ajout");
+        db.addList(new List(1,"Birthday","Paul"));
+        System.out.println(db.getAllList().get(0).getComment());
+        System.out.println("Fin");
 
         btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){

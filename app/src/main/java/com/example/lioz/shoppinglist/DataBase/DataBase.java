@@ -24,7 +24,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     // create and drop SQL query List
     public static final String CREATE_TABLE_LIST = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_LIST +
-            "(" + KEY_ID_List + " INTEGER PRIMARY KEY AUTOINCREMENT," + LIST_NAME + " VARCHAR2(10)," + COMMENT + " VARCHAR2(10));";
+            " (" + KEY_ID_List + " INTEGER PRIMARY KEY AUTOINCREMENT," + LIST_NAME + " TEXT," + COMMENT + " TEXT);";
     public static final String DROP_TABLE_LIST = "DROP TABLE IF EXISTS " + TABLE_NAME_LIST + ";";
 
     private static final String TABLE_NAME_ITEM = "Item";
@@ -35,15 +35,18 @@ public class DataBase extends SQLiteOpenHelper {
 
     // create and drop table SQL query Item
     public static final String CREATE_TABLE_ITEM = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_ITEM +
-            "(" + KEY_ID_Item + "," + KEY_ID_List + " ," +
-            ARTICLE + "VARCHAR2(20)," + QUANTITY + " INTEGER," + BOUGHT + " BOOLEAN, FOREIGN KEY (" + KEY_ID_List + ") REFERENCES List(IdList), PRIMARY KEY (" + KEY_ID_Item + "," + KEY_ID_List + "));";
+            "(" + KEY_ID_Item + " INTEGER," + KEY_ID_List + " INTEGER," +
+            ARTICLE + " TEXT," + QUANTITY + " INTEGER, FOREIGN KEY (" + KEY_ID_List + ") REFERENCES "+ TABLE_NAME_LIST+" ("+KEY_ID_List+"), PRIMARY KEY (" + KEY_ID_Item + "," + KEY_ID_List + "));";
+
     public static final String DROP_TABLE_ITEM = "DROP TABLE IF EXISTS " + TABLE_NAME_ITEM + ";";
 
+
+
     // database initial creation ( void database )
-    private static final String DATABASE_NAME = "ShoppingList.db";
+    private static final String DATABASE_NAME = "ShoppingListDB";
     private static final int DATABASE_VERSION = 1;
     private static DataBase sInstance;
-    private static final String query = "INSERT INTO List (Id,ListName,Comment) VALUES(0,\"birthday\",\"ta mere\");";
+    private static final String query = "INSERT INTO List (IdList,ListName,Comment) VALUES(0,\"birthday\",\"ta mere\");";
 
     // synchronize database
     public static synchronized DataBase getInstance(Context context) {
@@ -59,6 +62,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     // create table
     public void onCreate(SQLiteDatabase db) {
+        System.out.println("CREATED");
         db.execSQL(CREATE_TABLE_LIST);
         db.execSQL(CREATE_TABLE_ITEM);
         db.execSQL(query);
@@ -70,6 +74,140 @@ public class DataBase extends SQLiteOpenHelper {
         db.execSQL(DROP_TABLE_LIST);
         db.execSQL(DROP_TABLE_ITEM);
         onCreate(db);
+    }
+
+    public void addList(List list) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(LIST_NAME, list.getListName());
+        values.put(COMMENT, list.getComment());
+        db.insert(TABLE_NAME_LIST, null, values);
+        db.close();
+    }
+
+    public void addItem(Item item) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID_Item, item.getIdItem());
+        values.put(KEY_ID_List, item.getIdList());
+        values.put(ARTICLE, item.getArticle());
+        values.put(QUANTITY, item.getQuantity());
+        values.put(BOUGHT, item.isBought());
+        db.insert(TABLE_NAME_ITEM, null, values);
+        db.close();
+    }
+
+    //get single list
+    public List getList(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_NAME_LIST, new String[]{KEY_ID_List,
+                        LIST_NAME, COMMENT}, KEY_ID_List + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        List list = new List(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), cursor.getString(2));
+        return list;
+    }
+
+    public java.util.List<List> getAllList() {
+        java.util.List<List> fullList = new ArrayList<List>();
+        // Select All Query
+        String selectQuery = "SELECT * FROM " + TABLE_NAME_LIST;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query(TABLE_NAME_LIST,null,null,null,null,null, null);
+
+        // looping through all rows and adding to list
+        if (cursor.getCount() == 0) return null;
+        else {
+            cursor.moveToFirst();
+            do {
+                List list = new List(Integer.parseInt(cursor
+                        .getString(0)), cursor.getString(1),
+                        cursor.getString(2));
+                fullList.add(list);
+            } while (cursor.moveToNext());
+        }
+        return fullList;
+    }
+
+    // update single List
+    public int updateList(List list) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(LIST_NAME, list.getListName());
+        values.put(COMMENT, list.getComment());
+
+        // updating row
+        return db.update(TABLE_NAME_LIST, values, KEY_ID_List + " = ?",
+                new String[]{String.valueOf(list.getId())});
+    }
+
+    // Deleting single list
+    public void deleteList(List list) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME_LIST, KEY_ID_List + " = ?",
+                new String[]{String.valueOf(list.getId())});
+        db.close();
+    }
+
+    // Getting list Count
+    public int getListCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_NAME_LIST;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        cursor.close();
+
+        // return count
+        return cursor.getCount();
+    }
+
+    // get a list of item belonging to the selected list
+    public java.util.List<Item> getAllItemWithListId(int id) {
+        java.util.List<Item> itemList = new ArrayList<Item>();
+        String selectQ = "SELECT  * FROM " + TABLE_NAME_ITEM + " WHERE "
+                + KEY_ID_List + " = " + String.valueOf(id) + ";";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQ, null);
+
+        Cursor cursor2 = db.query(TABLE_NAME_ITEM, new String[]{KEY_ID_Item,
+                        KEY_ID_List, ARTICLE}, KEY_ID_List + "=?",
+                new String[]{String.valueOf(id)}, null, null, null,
+                null);
+        if (cursor.moveToFirst()) {
+            do {
+                Item item = new Item(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID_Item))),
+                        Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID_List))),
+                        cursor.getString(cursor.getColumnIndex(ARTICLE)),
+                        Integer.parseInt(cursor.getString(cursor.getColumnIndex(QUANTITY))));
+                itemList.add(item);
+            } while (cursor.moveToNext());
+        }
+        return itemList;
+    }
+
+    public java.util.List<Item> getAllItems() {
+        java.util.List<Item> itemList = new ArrayList<Item>();
+        String selectQ = "SELECT  * FROM " + TABLE_NAME_ITEM;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQ, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Item item = new Item(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID_Item))),
+                        Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID_List))),
+                        cursor.getString(cursor.getColumnIndex(ARTICLE)),
+                        Integer.parseInt(cursor.getString(cursor.getColumnIndex(QUANTITY))));
+                itemList.add(item);
+            } while (cursor.moveToNext());
+        }
+        return itemList;
     }
 
 
