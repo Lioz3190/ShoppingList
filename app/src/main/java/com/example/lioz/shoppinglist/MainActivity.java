@@ -9,12 +9,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.lioz.shoppinglist.DataBase.DataBase;
@@ -22,8 +21,10 @@ import com.example.lioz.shoppinglist.DataBase.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private DataBase db;
 
+    private DataBase db;
+    java.util.List<List> list;
+    ListAdapter adapter ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +32,6 @@ public class MainActivity extends AppCompatActivity
         db = new DataBase(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab2 = (FloatingActionButton)findViewById(R.id.action_removelist);
-        fab2.setImageResource(R.drawable.trash_can);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.action_addlist);
         fab.setImageResource(R.drawable.addlistwhite);
@@ -46,7 +44,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -56,29 +53,12 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        final java.util.List<List> list = db.getAllList();
-        final ListAdapter adapter = new ListAdapter(this,R.layout.remove_item_list_of_list,list);
+        list = db.getAllList();
+        adapter = new ListAdapter(this,R.layout.remove_item_list_of_list,list);
         if (list.size() != 0){
             ListView lv = (ListView)findViewById(R.id.mainList);
             lv.setAdapter(adapter);
         }
-        fab2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ListView lv = (ListView)findViewById(R.id.mainList);
-                SparseBooleanArray checkedItemPositions = lv.getCheckedItemPositions();
-                int itemCount = lv.getCount();
-
-                for (int i = itemCount -1 ; i >= 0 ; i--){
-                    if (checkedItemPositions.get(i)){
-                        adapter.remove(list.get(i));
-                        db.deleteList(list.get(i));
-                    }
-                }
-                checkedItemPositions.clear();
-                adapter.notifyDataSetChanged();
-            }
-        });
     }
 
     @Override
@@ -139,9 +119,5 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void displayListView (){
-
     }
 }

@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.lioz.shoppinglist.DataBase.DataBase;
 import com.example.lioz.shoppinglist.DataBase.List;
 
 /**
@@ -20,6 +22,7 @@ public class ListAdapter extends ArrayAdapter<List> {
     Context context;
     private int layoutResourceId;
     java.util.List <List> shoppingList;
+    private DataBase db;
 
     public ListAdapter(Context context, int resource, java.util.List <List> list) {
         super(context, resource, list);
@@ -35,6 +38,7 @@ public class ListAdapter extends ArrayAdapter<List> {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(layoutResourceId, parent, false);
+
             view.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent intentMyList = new Intent(context, MyList.class);
@@ -46,6 +50,20 @@ public class ListAdapter extends ArrayAdapter<List> {
                 ;
             });
         }
+        Button removeBtn = (Button) view.findViewById(R.id.removeBtn);
+        removeBtn.setTag(position);
+        removeBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db = new DataBase(context);
+                db.getWritableDatabase();
+                shoppingList = db.getAllList();
+                int index = (int)view.getTag();
+                shoppingList.remove(index);
+                db.deleteListWithId(index);
+                notifyDataSetChanged();
+            }
+        });
         TextView name = (TextView) view.findViewById(R.id.nameList);
         TextView comment = (TextView) view.findViewById(R.id.comment);
         List list = shoppingList.get(position);

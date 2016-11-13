@@ -5,12 +5,15 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <CheckBox
-        android:id="@+id/checkbox"
+    <Button
+        android:id="@+id/removeBtn"
         android:layout_width="fill_parent"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:layout_weight="0.9"
-        android:layout_height="60dp"/>
+        android:background="@drawable/trash_can"
+        android:layout_weight="0.87"
+        android:layout_height="60dp"
+        android:onClick="removeList"
+        android:backgroundTint="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color" />
+
 
     <LinearLayout
         android:orientation="vertical"

@@ -39,7 +39,6 @@ public class ItemManager {
     // add articles to my list
     public long addMyList(Item myListInformation){
         ContentValues values = new ContentValues();
-        values.put(KEY_ID_Item,myListInformation.getIdItem());
         values.put(KEY_ID_List,myListInformation.getIdList());
         values.put(ARTICLE,myListInformation.getArticle());
         values.put(QUANTITY,myListInformation.getQuantity());
