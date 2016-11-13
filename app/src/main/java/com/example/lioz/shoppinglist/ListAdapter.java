@@ -50,6 +50,12 @@ public class ListAdapter extends ArrayAdapter<List> {
                 ;
             });
         }
+
+        TextView name = (TextView) view.findViewById(R.id.nameList);
+        TextView comment = (TextView) view.findViewById(R.id.comment);
+        final List list = shoppingList.get(position);
+        name.setText(list.getListName());
+        comment.setText(list.getComment());
         Button removeBtn = (Button) view.findViewById(R.id.removeBtn);
         removeBtn.setTag(position);
         removeBtn.setOnClickListener(new Button.OnClickListener() {
@@ -57,18 +63,13 @@ public class ListAdapter extends ArrayAdapter<List> {
             public void onClick(View view) {
                 db = new DataBase(context);
                 db.getWritableDatabase();
-                shoppingList = db.getAllList();
                 int index = (int)view.getTag();
+                shoppingList = db.getAllList();
                 shoppingList.remove(index);
-                db.deleteListWithId(index);
+                db.deleteListWithId(list.getId());
                 notifyDataSetChanged();
             }
         });
-        TextView name = (TextView) view.findViewById(R.id.nameList);
-        TextView comment = (TextView) view.findViewById(R.id.comment);
-        List list = shoppingList.get(position);
-        name.setText(list.getListName());
-        comment.setText(list.getComment());
 
         return view;
     }
