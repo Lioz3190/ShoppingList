@@ -63,7 +63,8 @@ public class MyList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 db.addItem(new Item(idList, editTxt.getText().toString(), 1));
-                adapter.notifyDataSetChanged();
+                finish();
+                startActivity(getIntent());
             }
         });
     }

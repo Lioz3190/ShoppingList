@@ -24,7 +24,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     // create and drop SQL query List
     public static final String CREATE_TABLE_LIST = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_LIST +
-            " (" + KEY_ID_List + " INTEGER PRIMARY KEY," + LIST_NAME + " TEXT," + COMMENT + " TEXT);";
+            " (" + KEY_ID_List + " INTEGER PRIMARY KEY AUTOINCREMENT," + LIST_NAME + " TEXT," + COMMENT + " TEXT);";
     public static final String DROP_TABLE_LIST = "DROP TABLE IF EXISTS " + TABLE_NAME_LIST + ";";
 
     private static final String TABLE_NAME_ITEM = "Item";
@@ -35,15 +35,15 @@ public class DataBase extends SQLiteOpenHelper {
 
     // create and drop table SQL query Item
     public static final String CREATE_TABLE_ITEM = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_ITEM +
-            "(" + KEY_ID_Item + " INTEGER," + KEY_ID_List + " INTEGER," +
-            ARTICLE + " TEXT," + QUANTITY + " INTEGER,"+BOUGHT+" INTEGER, FOREIGN KEY (" + KEY_ID_List + ") REFERENCES "+ TABLE_NAME_LIST+" ("+KEY_ID_List+"), PRIMARY KEY (" + KEY_ID_Item + "," + KEY_ID_List + "));";
+            "(" + KEY_ID_Item + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_ID_List + " INTEGER," +
+            ARTICLE + " TEXT," + QUANTITY + " INTEGER,"+BOUGHT+" INTEGER, FOREIGN KEY (" + KEY_ID_List + ") REFERENCES "+ TABLE_NAME_LIST+" ("+KEY_ID_List+"));";
 
     public static final String DROP_TABLE_ITEM = "DROP TABLE IF EXISTS " + TABLE_NAME_ITEM + ";";
 
 
 
     // database initial creation ( void database )
-    private static final String DATABASE_NAME = "ShoppingList3";
+    private static final String DATABASE_NAME = "ShoppingList4";
     private static final int DATABASE_VERSION = 1;
     private static DataBase sInstance;
 
@@ -169,7 +169,7 @@ public class DataBase extends SQLiteOpenHelper {
     // get a list of item belonging to the selected list
     public java.util.List<Item> getAllItemWithListId(int id) {
         java.util.List<Item> itemList = new ArrayList<Item>();
-        String selectQ = "SELECT  * FROM " + TABLE_NAME_ITEM + " WHERE "
+        String selectQ = "SELECT * FROM " + TABLE_NAME_ITEM + " WHERE "
                 + KEY_ID_List + " = " + String.valueOf(id);
         System.out.println(selectQ);
 
@@ -180,7 +180,9 @@ public class DataBase extends SQLiteOpenHelper {
                         KEY_ID_List, ARTICLE}, KEY_ID_List + "=?",
                 new String[]{String.valueOf(id)}, null, null, null,
                 null);
-        if ( cursor.moveToFirst()){
+        System.out.println(cursor.getCount());
+        if ( cursor.getCount() != 0){
+            cursor.moveToFirst();
             do {
                 Item item = new Item(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID_Item))),
                         cursor.getString(cursor.getColumnIndex(ARTICLE)),

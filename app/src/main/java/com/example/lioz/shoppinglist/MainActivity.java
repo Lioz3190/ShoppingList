@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity
 
         java.util.List<List> list = db.getAllList();
         if (list.size() != 0){
-            ListAdapter adapter = new ListAdapter(this,R.layout.item_list_of_list,list);
+            ListAdapter adapter = new ListAdapter(this,R.layout.remove_item_list_of_list,list);
             ListView lv = (ListView)findViewById(R.id.mainList);
             lv.setAdapter(adapter);
         }

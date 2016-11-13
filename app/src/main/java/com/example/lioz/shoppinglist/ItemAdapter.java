@@ -43,7 +43,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         CheckBox bought = (CheckBox) view.findViewById(R.id.boughtItem);
         Item items = listItems.get(position);
         item.setText(items.getArticle());
-        quantity.setText(items.getQuantity());
+        quantity.setText(String.valueOf(items.getQuantity()));
         if (items.isBought()>0){
             bought.setChecked(true);
         }else{
