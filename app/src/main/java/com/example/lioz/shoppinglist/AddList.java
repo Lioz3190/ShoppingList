@@ -1,9 +1,11 @@
 package com.example.lioz.shoppinglist;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
@@ -38,8 +40,14 @@ public class AddList extends AppCompatActivity {
         });
 
         dbList.open();
-        dbList.addList(new List("birthDay","Paul"));
-        dbList.getList();
+        dbList.addList(new List(1,"birthDay","Paul"));
+        ListManager lm = new ListManager(this);
+        lm.open();
+        java.util.List<List> values = lm.getList();
+        ArrayAdapter<List> adapter = new ArrayAdapter<List>(this,android.R.layout.simple_list_item_1,values);
+        ListView lv = (ListView)findViewById(R.id.mainList);
+        lv.setAdapter(adapter);
+        dbList.close();
     }
 
 

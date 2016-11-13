@@ -11,7 +11,12 @@ import java.util.ArrayList;
 public class List {
     private String listName;
     private String comment;
-    public List(String listName_, String comment_){
+    private int id;
+
+
+    public List(int id, String listName_, String comment_){
+        this.id = id;
+
         this.listName = listName_;
         this.comment = comment_;
     }
@@ -30,5 +35,13 @@ public class List {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

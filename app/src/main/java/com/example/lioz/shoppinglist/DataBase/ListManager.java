@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 /**
  * Created by Lioz on 11/11/2016.
  */
@@ -43,8 +45,26 @@ public class ListManager {
         return db.insert(TABLE_NAME,null,values);
     }
     // get every list of the main activity
-    public Cursor getList(){
-        return db.rawQuery("SELECT * FROM "+TABLE_NAME,null);
+    public java.util.List<List> getList(){
+        java.util.List<List> list= new ArrayList<List>();
+        Cursor c = db.query(ListManager.TABLE_NAME,null,null,null,null,null,null);
+        c.moveToFirst();
+        while(!c.isAfterLast()){
+            List list2 = cursorToList(c,0,"birthday","paul");
+            list.add(list2);
+            c.moveToNext();
+        }
+        c.close();
+        return list;
+    }
+
+    private List cursorToList(Cursor c,int id, String listName, String comment){
+        List list = new List(id,listName,comment);
+        list.setId(c.getInt(0));
+        list.setListName(c.getString(1));
+        list.setComment(c.getString(2));
+        return list;
+
     }
 
     public int updateList(int id, List list){

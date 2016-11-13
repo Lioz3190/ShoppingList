@@ -13,6 +13,7 @@ public class DataBase extends SQLiteOpenHelper  {
     private static final String DATABASE_NAME = "ShoppingList.db";
     private static final int DATABASE_VERSION = 1;
     private static DataBase sInstance;
+    private static final String query = "INSERT INTO List (Id,ListName,Comment) VALUES(0,\"birthday\",\"ta mere\");";
 
     // synchronize database
     public static synchronized DataBase getInstance(Context context){
@@ -29,6 +30,8 @@ public class DataBase extends SQLiteOpenHelper  {
     // create table
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(ListManager.CREATE_TABLE_LIST);
+        db.execSQL(query);
+
     }
 
     // refactor database
