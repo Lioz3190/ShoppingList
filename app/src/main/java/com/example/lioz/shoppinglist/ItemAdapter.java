@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.example.lioz.shoppinglist.DataBase.DataBase;
 import com.example.lioz.shoppinglist.DataBase.Item;
 import com.example.lioz.shoppinglist.DataBase.List;
 
@@ -21,6 +23,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
     Context context;
     private int layoutResourceId;
     java.util.List <Item> listItems;
+    private DataBase db = new DataBase(getContext());
 
     public ItemAdapter(Context context, int resource, java.util.List <Item> list) {
         super(context, resource, list);
@@ -50,6 +53,22 @@ public class ItemAdapter extends ArrayAdapter<Item> {
             bought.setChecked(false);
         }
 
+        bought.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (buttonView.isChecked()) {
+                    System.out.println(listItems.get(position).isBought());
+                    System.out.println(listItems.get(position).getIdItem());
+                    System.out.println(listItems.get(position).getArticle());
+                    System.out.println("Check");
+                    listItems.get(position).setBought(1);
+                    db.updateItem(listItems.get(position));
+                } else {
+                    listItems.get(position).setBought(0);
+                    db.updateItem(listItems.get(position));
+                }
+            }
+        });
 
         return view;
     }

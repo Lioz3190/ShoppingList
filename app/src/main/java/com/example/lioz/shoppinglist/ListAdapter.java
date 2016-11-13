@@ -38,6 +38,7 @@ public class ListAdapter extends ArrayAdapter<List> {
             view.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent intentMyList = new Intent(context, MyList.class);
+                    System.out.println(shoppingList.get(position).getId());
                     intentMyList.putExtra("ID_LIST",shoppingList.get(position).getId());
                     context.startActivity(intentMyList);
                 }

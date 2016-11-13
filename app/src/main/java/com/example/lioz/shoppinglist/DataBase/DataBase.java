@@ -43,7 +43,7 @@ public class DataBase extends SQLiteOpenHelper {
 
 
     // database initial creation ( void database )
-    private static final String DATABASE_NAME = "ShoppingList4";
+    private static final String DATABASE_NAME = "ShoppingListV2";
     private static final int DATABASE_VERSION = 1;
     private static DataBase sInstance;
 
@@ -141,6 +141,19 @@ public class DataBase extends SQLiteOpenHelper {
         // updating row
         return db.update(TABLE_NAME_LIST, values, KEY_ID_List + " = ?",
                 new String[]{String.valueOf(list.getId())});
+    }
+
+    public int updateItem(Item item) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID_List, item.getIdList());
+        values.put(ARTICLE, item.getArticle());
+        values.put(QUANTITY, item.getQuantity());
+        values.put(BOUGHT, item.isBought());
+
+        return db.update(TABLE_NAME_ITEM, values, KEY_ID_Item + " = ?",
+                new String[]{String.valueOf(item.getIdItem())});
     }
 
     // Deleting single list

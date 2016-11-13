@@ -5,20 +5,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.lioz.shoppinglist.DataBase.DataBase;
 import com.example.lioz.shoppinglist.DataBase.Item;
 
+import java.util.ArrayList;
+
 /**
  * Created by Lioz on 05/11/2016.
  */
 public class MyList extends AppCompatActivity {
+    private ArrayList<String> listItems = new ArrayList<>();
     ArrayAdapter<String> adapter;
+    private ListView listView;
     private EditText editTxt;
     private Button btn;
     private DataBase db;
+    private CheckBox bought;
     private Integer idList;
 
     // Called when the activity is first created
@@ -32,6 +39,8 @@ public class MyList extends AppCompatActivity {
         // Reference
         btn = (Button) findViewById(R.id.addBtn);
         editTxt = (EditText) findViewById(R.id.editTxt);
+        listView = (ListView) findViewById(R.id.listElement);
+        bought = (CheckBox) findViewById(R.id.boughtItem);
         // Defining the ArrayAdapter to set items to ListView
 
         db = new DataBase(this);
@@ -42,6 +51,7 @@ public class MyList extends AppCompatActivity {
             lv.setAdapter(adapter);
         }
 
+
         // Defining a click event listener for the button "Add"
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +61,8 @@ public class MyList extends AppCompatActivity {
                 startActivity(getIntent());
             }
         });
+
+
     }
 }
 
