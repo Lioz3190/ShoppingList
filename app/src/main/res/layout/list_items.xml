@@ -6,7 +6,7 @@
 
     <CheckBox
         android:layout_width="wrap_content"
-        android:id="@+id/broughtItem"
+        android:id="@+id/boughtItem"
         android:layout_height="60dp" />
 
     <LinearLayout

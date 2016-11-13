@@ -37,8 +37,10 @@ public class AddList extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 System.out.println("i'm inserting into the list\n");
-                db.addList(new List(name.getText().toString(),comment.getText().toString()));
+                List list = new List(name.getText().toString(),comment.getText().toString());
+                db.addList(list);
                 Intent intentAddList = new Intent(AddList.this,MyList.class);
+                intentAddList.putExtra("ID_LIST",list.getId());
                 startActivity(intentAddList);
             }
         });

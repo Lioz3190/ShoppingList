@@ -40,11 +40,11 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         }
         TextView item = (TextView) view.findViewById(R.id.nameItem);
         TextView quantity = (TextView) view.findViewById(R.id.quantityItem);
-        CheckBox brought = (CheckBox) view.findViewById(R.id.broughtItem);
+        CheckBox bought = (CheckBox) view.findViewById(R.id.boughtItem);
         Item items = listItems.get(position);
         item.setText(items.getArticle());
         quantity.setText(items.getQuantity());
-        brought.setChecked(items.isBought());
+        bought.setChecked(items.isBought());
 
         return view;
     }
