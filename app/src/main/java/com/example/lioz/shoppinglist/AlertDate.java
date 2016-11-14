@@ -2,6 +2,7 @@ package com.example.lioz.shoppinglist;
 
 
 import android.app.AlarmManager;
+import android.app.Dialog;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -15,13 +16,20 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 
+import com.example.lioz.shoppinglist.DataBase.DataBase;
+import com.example.lioz.shoppinglist.DataBase.List;
 import com.example.lioz.shoppinglist.Notify.NotificationPublisher;
 //import com.example.lioz.shoppinglist.Notify.NotificationReceiverActivity;
 import com.example.lioz.shoppinglist.fragments.DatePickerFragment;
 import com.example.lioz.shoppinglist.fragments.TimePickerFragment;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -33,11 +41,15 @@ public class AlertDate extends AppCompatActivity implements DatePickerFragment.o
 
 
     private Calendar alarm = Calendar.getInstance();
+    private DataBase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_date);
+
+
+
     }
 
 
@@ -54,7 +66,8 @@ public class AlertDate extends AppCompatActivity implements DatePickerFragment.o
     public void scheduleNotification(View v) {
 
         Notification.Builder builder = new Notification.Builder(this);
-        builder.setContentTitle("Anniversaire Liste des courses");
+        TextView listText = (TextView) findViewById(R.id.listTextView);
+        builder.setContentTitle("Liste des courses : "+listText.getText());
         builder.setContentText("Pensez à faire vos courses !");
         builder.setSmallIcon(R.drawable.ic_shopping_cart_black_24dp);
 
@@ -64,12 +77,38 @@ public class AlertDate extends AppCompatActivity implements DatePickerFragment.o
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         long futureInMillis =  SystemClock.elapsedRealtime() +(alarm.getTimeInMillis() - Calendar.getInstance().getTimeInMillis());
-        System.out.println(futureInMillis);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
 
         finish();
 
+    }
+
+    public void showList(View v){
+        db = new DataBase(this);
+        final java.util.List<String> my_list;
+        my_list = db.getAllListName();
+        //adapter
+        final ArrayAdapter<String> array_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,my_list);
+        final Dialog list_dialog = new Dialog(this);
+        list_dialog.setContentView(R.layout.dialog_list);
+
+        ListView list = (ListView)list_dialog.findViewById(R.id.component_list);
+        list.setAdapter(array_adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position,
+                                    long arg3)
+            {
+                TextView listText= (TextView) findViewById(R.id.listTextView);
+                listText.setText((String) adapter.getItemAtPosition(position));
+                list_dialog.dismiss();
+            }
+        });
+
+
+        list_dialog.show();
     }
 
 

@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="268dp"
         android:layout_height="60dp">
 
         <TextView
@@ -27,6 +27,15 @@
             android:layout_height="15dp"
             android:textStyle="normal|italic"
             android:id="@+id/quantityItem" />
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/remove_item"
+        android:layout_width="match_parent"
+        android:background="@drawable/trash_can"
+        android:layout_height="60dp"
+
+        android:backgroundTint="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color" />
 
 </LinearLayout>

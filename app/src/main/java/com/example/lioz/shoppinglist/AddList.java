@@ -23,7 +23,7 @@ public class AddList extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_addlist);
+        setContentView(R.layout.activity_add_list);
 
         db = new DataBase(this);
 

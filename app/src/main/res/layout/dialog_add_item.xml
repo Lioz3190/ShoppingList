@@ -15,52 +15,59 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="List name"
+                android:text="Nom"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
-                android:id="@+id/ListName" />
+                android:id="@+id/itemName" />
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:hint="ex : birthday party"
-                android:id="@+id/editListName"
+                android:hint="ex : Carotte"
+                android:id="@+id/editItemName"
+                android:layout_weight="0.1" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Quantité"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:id="@+id/quantity" />
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="ex : 5"
+                android:id="@+id/editQuantity"
                 android:layout_weight="0.1" />
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_weight="0.07">
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/Comment"
-                android:text="Comment" />
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="77dp"
-                android:id="@+id/editComment"
-                android:background="@drawable/textinputborder"/>
-        </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
+
             <Button
-                android:layout_width="fill_parent"
+                android:text="Add Item"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/SaveListButton"
-                android:clickable="true"
-                android:onClick="MyList"
-                android:text="Add items"/>
+                android:id="@+id/addItem"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/colorPrimaryDark"
+                android:elevation="4dp"
+                android:layout_marginTop="50dp"
+                android:paddingLeft="80dp"
+                android:paddingRight="80dp"
+                android:textColor="#fff"/>
+
         </LinearLayout>
-        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

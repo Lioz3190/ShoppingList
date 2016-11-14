@@ -43,7 +43,7 @@ public class DataBase extends SQLiteOpenHelper {
     public static  Integer i = 0;
 
     // database initial creation ( void database )
-    private static final String DATABASE_NAME = "ShoppingListV7";
+    private static final String DATABASE_NAME = "ShoppingListFinal.db";
     private static final int DATABASE_VERSION = 1;
     private static DataBase sInstance;
 
@@ -130,6 +130,25 @@ public class DataBase extends SQLiteOpenHelper {
         return fullList;
     }
 
+    public ArrayList<String> getAllListName() {
+        ArrayList<String> fullList = new ArrayList<String>();
+        // Select All Query
+        String selectQuery = "SELECT "+ LIST_NAME +" FROM " + TABLE_NAME_LIST;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query(TABLE_NAME_LIST,null,null,null,null,null, null);
+
+        // looping through all rows and adding to list
+        if (cursor.getCount() == 0) return fullList;
+        else {
+            cursor.moveToFirst();
+            do {
+                fullList.add(cursor.getString(cursor.getColumnIndex(LIST_NAME)));
+            } while (cursor.moveToNext());
+        }
+        return fullList;
+    }
+
     // update single List
     public int updateList(List list) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -164,6 +183,13 @@ public class DataBase extends SQLiteOpenHelper {
     public int deleteListWithId(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME_LIST, KEY_ID_List + " = " + id , null);
+    }
+
+    public void deleteItem(Item item) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME_ITEM, KEY_ID_Item + " = ?",
+                new String[]{String.valueOf(item.getIdItem())});
+        db.close();
     }
 
     // Getting list Count

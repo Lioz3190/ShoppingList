@@ -9,14 +9,34 @@
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true">
 
+    <Button
+        android:text="Pick List"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pickList"
+        android:onClick="showList"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="4dp"
+        android:layout_marginTop="50dp"
+        android:paddingLeft="80dp"
+        android:paddingRight="80dp"
+        android:textColor="#fff"/>
+
     <TextView
-        android:text="Config Alarm"
+        android:text=""
         android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:id="@+id/textView2"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="16dp" />
+        android:layout_height="wrap_content"
+        android:id="@+id/listTextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:minHeight="43dp"
+        android:layout_weight="0.07" />
 
     <Button
         android:text="Pick Date"
@@ -35,7 +55,7 @@
 
 
     <TextView
-        android:text="La date"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dateTextView"
@@ -63,7 +83,7 @@
         android:textColor="#fff"/>
 
     <TextView
-        android:text="L'heure"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/timeTextView"
